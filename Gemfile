@@ -4,7 +4,9 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+#gem 'mindapp2', '~> 0.1.1.4'
+gem 'mindapp2', github: 'kul1/mindapp2', branch: 'v0.1.5'
+gem 'maruku', '~> 0.7.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -50,3 +52,34 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'rouge'
+gem 'normalize-rails'
+gem 'font-awesome-rails'
+gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'mongoid-paperclip', require: 'mongoid_paperclip'
+gem 'meta-tags'
+gem 'jquery-turbolinks'
+gem 'mongo', '~> 2.2'
+gem 'bson', '~> 4.0'
+gem 'mongoid', github: 'mongodb/mongoid'
+gem 'nokogiri'
+gem 'haml', git: 'https://github.com/haml/haml'
+gem 'mail'
+gem 'prawn'
+gem 'redcarpet'
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'omniauth-identity'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
+gem 'cloudinary'
+gem 'kaminari'
+gem 'kaminari-mongoid'
+gem 'jquery-rails'
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-byebug'
+end
