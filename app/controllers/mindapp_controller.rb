@@ -156,7 +156,10 @@ class MindappController < ApplicationController
       end
     end   
   end
-
+  
+  # from gem mindapp2, helper.rb
+  #     when 'list'
+  #       'output'
   def run_output
     init_vars(params[:id])
     service= @xmain.service
@@ -315,14 +318,10 @@ class MindappController < ApplicationController
     require 'rdoc'
     @app= get_app
     @intro = File.read('README.md')
-    @print= "<div align='right'><img src='/assets/printer.png'/> <a href='/mindapp/doc_print' target='_blank'/>พิมพ์</a></div>"
+    @print= "<div align='right'><img src='/assets/printer.png'/> <a href='/mindapp/doc_print' target='_blank'/>Print์</a></div>"
     doc= render_to_string 'doc.md', :layout => false
     require 'maruku'
     html= Maruku.new(doc).to_html
-    # require 'kramdown'
-    # html= Kramdown::Document.new(doc)
-    #html= Maruku.new(doc).to_html
-
     File.open('public/doc.html','w') {|f| f.puts html }
     respond_to do |format|
       format.html {
@@ -339,7 +338,7 @@ class MindappController < ApplicationController
         # system('pdflatex tmp/doc.tex ')
         # send_file( 'tmp/doc.pdf', :type => ‘application/pdf’,
         # :disposition => ‘inline’, :filename => 'doc.pdf')
-        render :text=>'done'
+        render :plain =>'done'
       }
     end
   end

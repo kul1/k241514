@@ -1,0 +1,21 @@
+- @title= "My Docs"
+%p
+- @page_title  = 'All Docs'
+= paginate @docs
+%table{:id=>"pending-table", :width=>"100%"}
+  %tr{:style=>"color:white; background-color:#97BF60;"}
+    %th Name
+    %th Filename
+    %th Created
+    %th Updated
+    %th Delete
+    %th Edit  
+  - @docs.each do |f|
+    %tr
+      %td= link_to f.name, :controller=>"docs", :action=>"show", :id=>f.id
+      %td= f.filename
+      %td= f.created_at.strftime('%m/%d/%Y')
+      %td= f.updated_at.strftime('%m/%d/%Y')
+      %td(align='center')= link_to image_tag('delete.png', style:'border:none; float:none;'), "#", :onclick=>"if (confirm('Please Confirm')) {location.hash='/docs/destroy/#{f.id}';}"
+      %td(align='center')= link_to image_tag('pencil.png', style:'border:none; float:none;'), {controller: "mindapp", action: "init", s: 'docs:xedit_Docs', Docs_id: f.id}, data: { confirm: "Please Confirm" }
+
