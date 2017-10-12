@@ -1,0 +1,11 @@
+%div{"data-role" => "menu_mm", "data-theme" => "b", "data-backbtn"=>"false"}
+
+%div= @doc.filename
+= link_to image_tag(@doc.url) 
+
+= @doc.id
+this is text +"\n"
+
+= link_to "Printable doc (pdf)", {controller: "mindapp", action: "init", s: 'docs:xedit_doc', doc_id: @doc.id}
+= link_to image_tag('pencil.png', style:'border:none; float:none;'), {controller: "mindapp", action: "init", s: 'docs:xedit_doc', doc_id: @doc.id}, data: { confirm: "Please Confirm" }
+

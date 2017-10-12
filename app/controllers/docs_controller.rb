@@ -1,22 +1,43 @@
 class DocsController < ApplicationController
-  before_action :load_doc, only: [:show, :destroy]
+  # before_action :load_doc, only: [:show, :destroy]
 
 	def index
     @docs = Mindapp::Doc.desc(:created_at).page(params[:page]).per(10)
 	end
 
-  def show 
-    respond_to do |format|
-      format.html
-      format.pdf do
-        pdf = Prawn::Document.new
-        pdf.text "Hello World"
-        send_data pdf.render, filename: "#{@doc.filename}.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
-      end
+  def my
+    @docs = Mindapp::Doc.where(user_id: current_ma_user).desc(:created_at).page(params[:page]).per(10)
+    @page_title       = 'Member Doc'
+  end
+
+  def show
+    @doc = Mindapp::Doc.find params[:id]
+    # doc = @doc
+    if @doc.cloudinary
+      require 'net/http'
+      require "uri"
+      uri = URI.parse(@doc.url)
+      data = Net::HTTP.get_response(uri)
+      send_data(data.body, :filename=>@doc.filename, :type=>@doc.content_type, :disposition=>"inline")
+    else
+      data= IO.binread(Rails.root + @doc.url)
+      send_data(data, :filename=>@doc.filename, :type=>@doc.content_type, :disposition=>"inline") 
     end
   end
+
+
+  # def show 
+  #   respond_to do |format|
+  #     format.html
+  #     format.pdf do
+  #       pdf = Prawn::Document.new
+  #       pdf.text "Hello World"
+  #       send_data pdf.render, filename: "#{@doc.filename}.pdf",
+  #                             type: "application/pdf",
+  #                             disposition: "inline"
+  #     end
+  #   end
+  # end
 
   def edit
     @doc = Mindapp::Doc.find(params[:id])
@@ -30,15 +51,10 @@ class DocsController < ApplicationController
                       text: $xvars["form_doc"]["text"],
                       keywords: $xvars["form_doc"]["keywords"],
                       body: $xvars["form_doc"]["body"],
-
                       user_id: $xvars["user_id"])
     @doc.save!
   end
 
-  def my
-    @docs = Mindapp::Doc.where(user_id: current_ma_user).desc(:created_at).page(params[:page]).per(10)
-    @page_title       = 'Member Doc'
-  end
 
   def update
     # $xvars["select_doc"] and $xvars["edit_doc"]

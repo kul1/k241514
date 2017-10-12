@@ -276,6 +276,7 @@ class MindappController < ApplicationController
         :content_type => params.content_type || 'application/zip',
         :data_text=> '',
         :ma_display=>true,
+        :user=>current_ma_user,
         :ma_secured => @xmain.service.ma_secured )
     if defined?(IMAGE_LOCATION)
       filename = "#{IMAGE_LOCATION}/f#{Param.gen(:asset_id)}"

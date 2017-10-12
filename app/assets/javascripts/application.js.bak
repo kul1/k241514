@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.mobile.splitview
 //= require jquery.mobile-1.2.1
@@ -18,3 +19,7 @@
 //= require iscroll-wrapper
 //= require iscroll
 //= require mindapp
+//= require turbolinks
+//= require ckeditor/init
+
+

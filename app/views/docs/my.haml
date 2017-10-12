@@ -12,7 +12,7 @@
     %th Edit  
   - @docs.each do |f|
     %tr
-      %td= link_to f.name, :controller=>"docs", :action=>"show", :id=>f.id
+      %td= link_to f.filename, :controller=>"docs", :action=>"show", :id=>f.id
       %td= f.filename
       %td= f.created_at.strftime('%m/%d/%Y')
       %td= f.updated_at.strftime('%m/%d/%Y')
