@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get '/26ca1c534cf26cc7b2d53a3be06cd663.txt' => 'mindapp#index'
   post ':controller(/:action(/:id))(.:format)'
   get ':controller(/:action(/:id))(.:format)'
   get '/logout' => 'sessions#destroy', :as => 'logout'
